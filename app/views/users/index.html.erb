@@ -1,0 +1,30 @@
+<!---部分テンプレート部分---->
+<%= render 'users/user', user: @user %>
+<!---以下よりbooks閲覧画面---->
+<div class="col-md-8 offset-md-1">
+  <h2>Users</h2>
+     <table class="table">
+       <thead>
+          <tr>
+          <th>image</th>
+          <th>name</th>
+          <th colspan="3"></th>
+          </tr>
+       </thead>
+       <tbody>
+         <tr>
+          <td>
+            <%= attachment_image_tag @user, :profile_image_id, :fill, 100, 100, fallback: "no_image.jpg" %>
+          </td>
+          <td>
+           <th><%= @user.name %></th>
+          </td>
+          <td>
+          <p><%= @user.introduction %></p>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+    </div>
+  </div>
