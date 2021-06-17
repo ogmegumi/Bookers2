@@ -1,32 +1,43 @@
 class BooksController < ApplicationController
-  def index
-    @book = Book.new
-    @books = Book.all
-    @user = current_user
-  end
+   def index
+     @book = Book.new
+     @books = Book.all
+     @user = current_user
+   end
   
-  def create
-    @user = current_user
-    @book = Book.new(book_params)#データを新規登録するためのインスタンス作成 
-    @book.save
-    redirect_to book_path(@book.id)
-  end
+   def create
+     @book = Book.new(book_params)#データを新規登録するためのインスタンス作成 
+     @book.user = current_user #本のユーザーと現在のユーザーの関係性
+     @book.save
+     redirect_to book_path(@book.id)
+   end
   
-  def show
-   @user = current_user
-   @book = Book.find(params[:id])
-  end
-  
-  def update
+   def show
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to book_path(@book.id)
-  end
+    @user = @book.user
+   end
   
-  private
+   def edit
+     @book = Book.find(params[:id])
+   end
   
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end
+   def update
+     @book = Book.find(params[:id])
+     @book.update(book_params)
+     redirect_to book_path(@book.id)
+   end
+  
+   def destroy
+     book = Book.find(params[:id])
+     book.destroy
+     redirect_to books_path
+   end
+
+  
+   private
+  
+   def book_params
+     params.require(:book).permit(:title, :body)
+   end
   
 end

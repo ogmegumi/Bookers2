@@ -14,9 +14,7 @@
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container">
-            <a class="navbar-brand" href="/" >
-               <span>Bookers</span>
-            </a>
+            <%= link_to "Bookers", root_path, class:"navbar-brand" %>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,7 +25,7 @@
                        <%= link_to "Home", root_path ,class:"fas fa-home nav-link text-light" %>
                     </li>
                     <li>
-                       <%= link_to "Users", user_path(current_user.id) ,class:"fas fa-users nav-link text-light" %>
+                       <%= link_to "Users", users_path,class:"fas fa-users nav-link text-light" %>
                     </li>
                     <li>
                        <%= link_to "Books", books_path ,class:"fas fa-book-open nav-link text-light" %>
@@ -54,7 +52,13 @@
          </div>
         </nav>
       </header>
+      
+      <body>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
       <%= yield %>
+      </body
+      
       <footer>
         <div class="container mt-5">
          <div class="row">

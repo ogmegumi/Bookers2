@@ -1,6 +1,10 @@
-<!---部分テンプレート部分---->
-<%= render 'users/user', user: @user %>
-<!---以下よりbooks閲覧画面---->
+<div class="container px-5 px-sm-0">
+ <div class="row">
+  <div class="col-md3">
+  <!---部分テンプレート部分---->
+<%= render 'users/user', user: @user, book: @book %>
+  </div>
+<!---以下よりbooks(そのユーザーが投稿した本の)閲覧画面---->
 <div class="col-md-8 offset-md-1">
   <h2>Users</h2>
      <table class="table">
@@ -14,13 +18,13 @@
        <tbody>
          <tr>
           <td>
-            <%= attachment_image_tag @user, :profile_image_id, :fill, 100, 100, fallback: "no_image.jpg" %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %>
           </td>
           <td>
-           <th><%= @user.name %></th>
+           <%= @user.name %>
           </td>
           <td>
-          <p><%= @user.introduction %></p>
+           <%= link_to 'Show', user_path(@user.id) %>
           </td>
          </tr>
         </tbody>

@@ -1,18 +1,22 @@
 class UsersController < ApplicationController
     def index
-      @user = User.new
+      @book = Book.new
+      @books = Book.all
       @users = User.all
+      @user = current_user
+      @book = current_user #本のユーザーと現在のユーザーの関係性
     end
     
-    def create
-     @user = User.new(user_image_params)
-     @user.user_id = current_user.id
-     @user.save
-     redirect_to edit_user_path
-    end
+    # def create
+    # @user.user_id = current_user.id
+    # @user.save
+    # redirect_to edit_user_path
+    # end
   
     def show
       @user = User.find(params[:id])
+      @book = Book.new
+      @books = @user.books
     end
     
     def edit
@@ -21,14 +25,17 @@ class UsersController < ApplicationController
     
     def update
       @user = User.find(params[:id])
-      @user.update(user_params)
-      redirect_to edit_path(@user)
+      if @user.update(user_params)
+        flash[:notice] = "You have updated user successfully"
+        redirect_to user_path(@user)
+      else
+       render 'edit'
     end
     
     private
     
-    def user_image_params
-      params.require(:user_image).permit(:name, :profile_image, :introduction)
+    def user_params
+      params.require(:user).permit(:name, :profile_image, :introduction)
     end
     
 end
