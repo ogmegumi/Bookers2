@@ -8,8 +8,14 @@ class BooksController < ApplicationController
    def create
      @book = Book.new(book_params)#データを新規登録するためのインスタンス作成 
      @book.user = current_user #本のユーザーと現在のユーザーの関係性
-     @book.save
-     redirect_to book_path(@book.id)
+     if @book.save
+        redirect_to book_path(@book.id)
+        flash[:notice] = "You have created book successfully."
+     else
+        @books = Book.all
+        @user = current_user
+        render 'index'
+     end
    end
   
    def show
@@ -19,12 +25,21 @@ class BooksController < ApplicationController
   
    def edit
      @book = Book.find(params[:id])
+     if @book.user == current_user
+        render 'edit'
+     else
+        redirect_to books_path
+     end
    end
   
    def update
      @book = Book.find(params[:id])
-     @book.update(book_params)
-     redirect_to book_path(@book.id)
+     if @book.update(book_params)
+        flash[:notice] = "You have updated book successfully."
+        redirect_to book_path(@book.id)
+     else
+        render 'edit'
+     end
    end
   
    def destroy

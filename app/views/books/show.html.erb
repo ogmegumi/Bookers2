@@ -20,16 +20,19 @@
                <td>
                   <%= @book.body %>
                </td>
+               <% if @user.id == current_user.id %>
                <td>
                   <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %>
                </td>
+               <% end %>
+               <% if @user.id == current_user.id %>
                <td>
                   <%= link_to "Destroy", book_path(@book), class:"btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
                </td>
+               <% end %>
              </tr>
            </tbody>
         </table>
       </div>
    </div>
-  </div>
 </div>

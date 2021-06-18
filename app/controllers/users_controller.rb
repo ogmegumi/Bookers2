@@ -17,10 +17,16 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @book = Book.new
       @books = @user.books
+      @book.id = current_user
     end
     
     def edit
       @user = User.find(params[:id])
+      if @user.id == current_user
+        render 'edit'
+      else
+        redirect_to user_path(@user)
+      end
     end
     
     def update
@@ -29,7 +35,8 @@ class UsersController < ApplicationController
         flash[:notice] = "You have updated user successfully"
         redirect_to user_path(@user)
       else
-       render 'edit'
+        render 'edit'
+      end
     end
     
     private

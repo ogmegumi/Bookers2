@@ -1,5 +1,16 @@
-<p id="notice"></p>
 <div class="container">
+   <!--サクセスメッセージ・バリテーション-->
+  <% if @book.errors.any? %>
+     <h3 style="color: red"><%= @book.errors.count %>error prohibited this book from being saved:</h3>
+     <div id="error_explanation">
+       <ul style="color: red">
+         <% @book.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+         <% end %>
+       </ul>
+     </div>
+   <% end %>
+
    <div class="row">
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h1>Editing Book</h1>

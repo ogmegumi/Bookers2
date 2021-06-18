@@ -1,10 +1,16 @@
-<% if flash[:notice] %>
-     <p id="notice">
-       <%= flash[:notice] %>
-     </p>
-<% end %>
-
 <div class="container">
+   <!--サクセスメッセージappilication実装済み・バリテーション-->
+   <% if @user.errors.any? %>
+     <h3 style="color: red"><%= @user.errors.count %>error prohibited this book from being saved:</h2>
+     <div id="error_explanation">
+       <ul style="color: red">
+         <% @user.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+         <% end %>
+       </ul>
+      </div>
+   <% end %>
+
     <div class="row">
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h2>User info</h2>
