@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-0">
+<div class="container">
    <!--サクセスメッセージ・バリテーション-->
   <% if @book.errors.any? %>
      <h3 style="color: red"><%= @book.errors.count %>error prohibited this book from being saved:</h3>
@@ -12,7 +12,7 @@
    <% end %>
 
   <div class="row">
-    <div class="col-md3">
+    <div class="col-md-3">
    
   <!---部分テンプレート部分---->
 <%= render 'users/user', user: @user, book: @book %>

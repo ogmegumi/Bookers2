@@ -1,8 +1,8 @@
-<div class="container px-5 px-sm-0">
+<div class="container">
     <div class="row">
-       <div class="col-md3">
+       <div class="col-md-3">
         <!---部分テンプレート部分---->
-         <%= render 'users/user', user: @user, book: @book %>
+         <%= render 'users/user', user: @user, book: @book_new %>
         <!---以下よりbooks詳細画面---->
      </div>
      <div class="col-md-8 offset-md-1">
@@ -11,7 +11,7 @@
            <tbody>
              <tr>
                <td>
-                  <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg" %>
+                  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %><br>
                   <%= link_to @user.name,user_path(@user.id) %>
                </td>
                <td>
